@@ -145,5 +145,45 @@
       checkRegistrationStatus();
     });
   </script>
+  <script>
+// Debug version - will show alerts to see what's happening
+
+alert("Script is running! Page loaded.");  // ← This should pop up immediately
+
+function closeAnnouncement(){
+  localStorage.setItem('mpl_announcement_closed','yes');
+  document.getElementById('announcementBanner')?.style.display='none';
+}
+
+function checkAccess(){
+  alert("Enter button clicked!");  // ← This MUST appear when you click Enter
+
+  const memberId = document.getElementById('loginMemberId').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  const msg = document.getElementById('loginMsg');
+
+  if(!memberId || !code){
+    msg.textContent = "Please enter both fields";
+    return;
+  }
+
+  if(memberId.startsWith("MPL-") && code.startsWith("MPL-")){
+    alert("Login SUCCESS! Hiding gate...");  // ← Success test
+    localStorage.setItem('mpl_access','granted');
+    document.getElementById('accessGate').style.display = 'none';
+  } else {
+    msg.textContent = "Invalid credentials";
+  }
+}
+
+// Rest of your functions (countdown, registration check, load event) remain the same...
+// ... paste the rest from your previous script here ...
+
+window.addEventListener('load', () => {
+  alert("Window load event fired!");  // ← Another check
+  // ... rest of load code ...
+});
+</script>
 </body>
 </html>
+
